@@ -154,9 +154,8 @@ export function AdvancedFilters({ filters, onFiltersChange, products }: Advanced
 
             {/* Categoria */}
             <div className="space-y-2">
-              <Label>Categoria</Label>
-              <Select value={filters.category} onValueChange={(value) => handleFilterChange('category', value)}>
-                <SelectTrigger>
+              <Label>Categoria</Label>              <Select value={filters.category} onValueChange={(value) => handleFilterChange('category', value)}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Todas as categorias" />
                 </SelectTrigger>
                 <SelectContent>
@@ -172,9 +171,8 @@ export function AdvancedFilters({ filters, onFiltersChange, products }: Advanced
 
             {/* Fornecedor */}
             <div className="space-y-2">
-              <Label>Fornecedor</Label>
-              <Select value={filters.supplier} onValueChange={(value) => handleFilterChange('supplier', value)}>
-                <SelectTrigger>
+              <Label>Fornecedor</Label>              <Select value={filters.supplier} onValueChange={(value) => handleFilterChange('supplier', value)}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Todos os fornecedores" />
                 </SelectTrigger>
                 <SelectContent>
@@ -190,9 +188,8 @@ export function AdvancedFilters({ filters, onFiltersChange, products }: Advanced
 
             {/* Status do Estoque */}
             <div className="space-y-2">
-              <Label>Status do Estoque</Label>
-              <Select value={filters.stockStatus} onValueChange={(value) => handleFilterChange('stockStatus', value)}>
-                <SelectTrigger>
+              <Label>Status do Estoque</Label>              <Select value={filters.stockStatus} onValueChange={(value) => handleFilterChange('stockStatus', value)}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Todos os status" />
                 </SelectTrigger>
                 <SelectContent>

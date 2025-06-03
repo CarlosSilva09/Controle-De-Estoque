@@ -194,24 +194,22 @@ export default function MovimentacoesPage() {
           <CardTitle className="text-lg">Filtros</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="space-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">            <div className="space-y-2">
               <label className="text-sm font-medium">Buscar</label>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 z-10 pointer-events-none" />
                 <Input
                   placeholder="Produto, motivo ou referência..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 pr-4"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Tipo de Movimentação</label>
-              <Select value={typeFilter} onValueChange={setTypeFilter}>
-                <SelectTrigger>
+              <label className="text-sm font-medium">Tipo de Movimentação</label>              <Select value={typeFilter} onValueChange={setTypeFilter}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Todos os tipos" />
                 </SelectTrigger>
                 <SelectContent>
@@ -224,9 +222,8 @@ export default function MovimentacoesPage() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Produto</label>
-              <Select value={productFilter} onValueChange={setProductFilter}>
-                <SelectTrigger>
+              <label className="text-sm font-medium">Produto</label>              <Select value={productFilter} onValueChange={setProductFilter}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Todos os produtos" />
                 </SelectTrigger>
                 <SelectContent>

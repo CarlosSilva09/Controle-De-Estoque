@@ -621,3 +621,30 @@ body {
 .animate-dropdown {
   animation: dropdownAnimation 0.3s ease-out forwards;
 }
+
+/* Fix for search inputs with icons - ensuring proper padding */
+.relative input[class*="pl-10"] {
+  padding-left: 2.5rem !important;
+}
+
+.relative input[class*="pl-12"] {
+  padding-left: 3rem !important;
+}
+
+/* Ensure SelectTrigger content doesn't overflow */
+[data-slot="select-trigger"] {
+  overflow: hidden;
+}
+
+[data-slot="select-value"] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Better responsive behavior for select components */
+@media (max-width: 640px) {
+  [data-slot="select-trigger"] {
+    min-width: 120px;
+  }
+}

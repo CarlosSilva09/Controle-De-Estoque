@@ -12,11 +12,10 @@ import {
   AlertTriangle,
   BarChart3,
   Target,
-  Clock,
   Zap,
   ShieldCheck
 } from "lucide-react";
-import { subDays, startOfDay } from "date-fns";
+import { subDays } from "date-fns";
 
 interface AdvancedKPICardsProps {
   products: Product[];
@@ -34,13 +33,10 @@ export function AdvancedKPICards({ products, movements }: AdvancedKPICardsProps)
   const lowStock = products.filter(p => p.stockQuantity > 0 && p.stockQuantity <= p.minStockLevel);
   const optimalStock = products.filter(p => p.stockQuantity > p.minStockLevel && p.stockQuantity <= p.maxStockLevel);
   const overStock = products.filter(p => p.stockQuantity > p.maxStockLevel);
-  
-  // Movimentações dos últimos 7 e 30 dias
+    // Movimentações dos últimos 7 dias
   const last7Days = subDays(new Date(), 7);
-  const last30Days = subDays(new Date(), 30);
   
   const movements7Days = movements.filter(m => m.timestamp >= last7Days);
-  const movements30Days = movements.filter(m => m.timestamp >= last30Days);
   
   const entries7Days = movements7Days.filter(m => m.type === 'IN').reduce((sum, m) => sum + m.quantity, 0);
   const exits7Days = movements7Days.filter(m => m.type === 'OUT').reduce((sum, m) => sum + m.quantity, 0);

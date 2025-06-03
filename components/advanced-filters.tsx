@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Filter, X, RotateCcw } from "lucide-react";
+import { Filter, RotateCcw } from "lucide-react";
 import { Product } from "@/lib/types";
 import { mockCategories, mockSuppliers } from "@/lib/mock-data";
 
@@ -35,7 +35,7 @@ interface AdvancedFiltersProps {
 export function AdvancedFilters({ filters, onFiltersChange, products }: AdvancedFiltersProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const handleFilterChange = (key: keyof ProductFilters, value: any) => {
+  const handleFilterChange = (key: keyof ProductFilters, value: string | { min: string; max: string }) => {
     onFiltersChange({
       ...filters,
       [key]: value,

@@ -29,7 +29,7 @@ export function ExportData({ products, movements }: ExportDataProps) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [open]);
 
-  const exportToCSV = (data: any[], filename: string) => {
+  const exportToCSV = (data: Record<string, unknown>[], filename: string) => {
     if (data.length === 0) {
       toast.error("Nenhum dado para exportar");
       return;
@@ -53,7 +53,7 @@ export function ExportData({ products, movements }: ExportDataProps) {
     downloadFile(csvContent, filename, "text/csv");
   };
 
-  const exportToJSON = (data: any[], filename: string) => {
+  const exportToJSON = (data: Record<string, unknown>[], filename: string) => {
     if (data.length === 0) {
       toast.error("Nenhum dado para exportar");
       return;
@@ -168,7 +168,7 @@ export function ExportData({ products, movements }: ExportDataProps) {
               id="export-type"
               className="rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#23232a] px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={exportType}
-              onChange={e => setExportType(e.target.value as any)}
+              onChange={e => setExportType(e.target.value as 'products' | 'movements')}
             >
               <option value="products">Produtos</option>
               <option value="movements">Movimentações</option>
@@ -178,7 +178,7 @@ export function ExportData({ products, movements }: ExportDataProps) {
               id="export-format"
               className="rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#23232a] px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={format}
-              onChange={e => setFormat(e.target.value as any)}
+              onChange={e => setFormat(e.target.value as 'csv' | 'json')}
             >
               <option value="csv">CSV</option>
             </select>

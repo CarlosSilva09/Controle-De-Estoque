@@ -1,8 +1,8 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartLegend } from "@/components/ui/chart";
-import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, CartesianGrid, Line, LineChart } from "recharts";
+import { ChartConfig, ChartTooltip, ChartLegend } from "@/components/ui/chart";
+import { XAxis, YAxis, ResponsiveContainer, CartesianGrid, Line, LineChart } from "recharts";
 import { StockMovement, Product } from "@/lib/types";
 import { format, subDays, startOfDay, eachDayOfInterval } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -98,8 +98,19 @@ export function StockValueTrend({ movements, products }: StockValueTrendProps) {
   const totalVolume = chartData.reduce((sum, day) => sum + day.movementVolume, 0);
   const avgEfficiency = chartData.reduce((sum, day) => sum + day.efficiency, 0) / chartData.length;
   const totalProfitability = chartData.reduce((sum, day) => sum + day.profitability, 0);
-
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: { 
+    active?: boolean; 
+    payload?: Array<{ 
+      payload: { 
+        dayOfWeek: string; 
+        fullDate: string; 
+        stockValue: number; 
+        movementVolume: number;
+        efficiency: number;
+        profitability: number;
+      } 
+    }>; 
+  }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (

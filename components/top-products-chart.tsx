@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import { Product } from "@/lib/types";
 import { formatCurrency } from "@/lib/stock-utils";
@@ -25,9 +25,8 @@ export function TopProductsChart({ products }: TopProductsChartProps) {
     price: product.price,
     quantity: product.stockQuantity,
   }));
-
   // Tick customizado para nomes de produtos
-  function CustomXAxisTick(props: any) {
+  function CustomXAxisTick(props: { x: number; y: number; payload: { value: string } }) {
     const { x, y, payload } = props;
     const lines = payload.value.split(/\s|-/).reduce((acc: string[], word: string) => {
       if (!acc.length) return [word];
@@ -66,7 +65,7 @@ export function TopProductsChart({ products }: TopProductsChartProps) {
                 tickFormatter={(value) => `R$ ${(value / 1000).toFixed(0)}k`}
                 className="sm:text-sm"
               />              <ChartTooltip
-                content={({ active, payload, label }) => {
+                content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (

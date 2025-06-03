@@ -51,7 +51,7 @@ export function CategoryDistributionChart({ products }: CategoryDistributionChar
   }, {} as Record<string, { name: string; value: number; quantity: number; products: number }>);
 
   const chartData = Object.values(categoryData).sort((a, b) => b.value - a.value);
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ payload: { name: string; value: number; quantity: number; products: number } }> }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       const percentage = ((data.value / chartData.reduce((sum, item) => sum + item.value, 0)) * 100).toFixed(1);
@@ -74,7 +74,14 @@ export function CategoryDistributionChart({ products }: CategoryDistributionChar
     return null;
   };
 
-  const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
+  const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: { 
+    cx: number; 
+    cy: number; 
+    midAngle: number; 
+    innerRadius: number; 
+    outerRadius: number; 
+    percent: number; 
+  }) => {
     if (percent < 0.05) return null;
     const RADIAN = Math.PI / 180;
     const radius = innerRadius + (outerRadius - innerRadius) * 0.7;

@@ -47,11 +47,9 @@ export default function ProdutosPage() {
           <Plus className="h-4 w-4" />
           Novo Produto
         </Button>
-      </div>
-      <ProductList 
+      </div>      <ProductList 
         products={products}
         onEditProduct={handleEditProduct}
-        onAddProduct={handleAddProduct}
         onMovementProduct={handleProductMovement}
       />
       <ProductForm

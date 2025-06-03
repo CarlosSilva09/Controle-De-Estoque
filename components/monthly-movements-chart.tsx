@@ -42,7 +42,7 @@ export function MonthlyMovementsChart({ movements }: MonthlyMovementsChartProps)
                 padding: '8px 12px',
                 maxWidth: '180px'
               }}
-              formatter={(value: any, name: string) => [value, name === "entrada" ? "Entradas" : "Saídas"]}
+              formatter={(value: number, name: string) => [value, name === "entrada" ? "Entradas" : "Saídas"]}
             />
             <Legend 
               verticalAlign="bottom"

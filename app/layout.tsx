@@ -1,22 +1,11 @@
 "use client";
 
-import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { RequestsProvider } from "@/contexts/requests-context";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const navItems = [
   { 

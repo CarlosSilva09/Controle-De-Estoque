@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Plus, Edit, Package, TrendingUp } from "lucide-react";
+import { Search, Edit, Package, TrendingUp } from "lucide-react";
 import { Product } from "@/lib/types";
 import { formatCurrency, formatDate, getStockStatusColor, getStockStatusText } from "@/lib/stock-utils";
 import { mockCategories } from "@/lib/mock-data";
@@ -15,11 +15,10 @@ import { mockCategories } from "@/lib/mock-data";
 interface ProductListProps {
   products: Product[];
   onEditProduct?: (product: Product) => void;
-  onAddProduct?: () => void;
   onMovementProduct?: (product: Product) => void;
 }
 
-export function ProductList({ products, onEditProduct, onAddProduct, onMovementProduct }: ProductListProps) {
+export function ProductList({ products, onEditProduct, onMovementProduct }: ProductListProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [stockFilter, setStockFilter] = useState<string>("all");

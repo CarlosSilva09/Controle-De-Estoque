@@ -47,8 +47,22 @@ export function StockLevelsAnalysis({ products }: StockLevelsAnalysisProps) {
     }));
 
   const lowStockCount = chartData.filter(item => item.isLowStock).length;
-  const outOfStockCount = chartData.filter(item => item.isOutOfStock).length;
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const outOfStockCount = chartData.filter(item => item.isOutOfStock).length;  const CustomTooltip = ({ active, payload }: { 
+    active?: boolean; 
+    payload?: Array<{ 
+      payload: { 
+        fullName: string; 
+        currentStock: number; 
+        minStock: number; 
+        maxStock: number; 
+        stockPercentage: number;
+        value: number;
+        price: number;
+        isLowStock: boolean;
+        isOutOfStock: boolean;
+      } 
+    }>; 
+  }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (

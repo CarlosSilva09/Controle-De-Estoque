@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import { StockMovement } from "@/lib/types";
 import { format, subDays, startOfDay } from "date-fns";
@@ -81,7 +81,7 @@ export function StockMovementsChart({ movements }: StockMovementsChartProps) {
                 tick={{ fontSize: 10 }}
                 className="sm:text-sm"
               />              <ChartTooltip
-                content={({ active, payload, label }) => {
+                content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (

@@ -2,13 +2,12 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { BarChart3, TrendingDown, TrendingUp, AlertTriangle, Package } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 import { Product, StockMovement } from "@/lib/types";
-import { formatCurrency, formatDate } from "@/lib/stock-utils";
+import { formatCurrency } from "@/lib/stock-utils";
 import { mockCategories } from "@/lib/mock-data";
 
 interface ReportsProps {
@@ -69,12 +68,17 @@ export function Reports({ products, movements }: ReportsProps) {
         acc[movement.productId].totalOut += movement.quantity;
       } else {
         acc[movement.productId].totalAdjustments++;
-      }
-      
-      return acc;
-    }, {} as Record<string, any>);
+      }      return acc;
+    }, {} as Record<string, { 
+      productName: string; 
+      productId: string;
+      totalIn: number; 
+      totalOut: number; 
+      totalAdjustments: number;
+      movements: number; 
+    }>);
     
-    return Object.values(summary).sort((a: any, b: any) => b.movements - a.movements);
+    return Object.values(summary).sort((a, b) => b.movements - a.movements);
   };
 
   const getCategoryAnalysis = () => {
@@ -163,9 +167,8 @@ export function Reports({ products, movements }: ReportsProps) {
                 <TableHead>Ajustes</TableHead>
                 <TableHead>Total Movimentos</TableHead>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {movementData.map((item: any) => (
+            </TableHeader>            <TableBody>
+              {movementData.map((item) => (
                 <TableRow key={item.productId}>
                   <TableCell>{item.productName}</TableCell>
                   <TableCell className="text-green-600">{item.totalIn}</TableCell>

@@ -10,15 +10,13 @@ import { formatCurrency } from "@/lib/stock-utils";
 import { 
   FileText,
   Download,
-  Calendar,
   TrendingUp,
   TrendingDown,
   DollarSign,
   Package,
   BarChart3,
   PieChart,
-  Activity,
-  Filter
+  Activity
 } from "lucide-react";
 import { format, subDays, startOfMonth, endOfMonth, startOfYear, endOfYear } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -124,11 +122,22 @@ export function AdvancedReports({ products, movements }: AdvancedReportsProps) {
       );
       acc[category].movements = categoryMovements.length;
       
-      return acc;
-    }, {} as Record<string, any>);
+      return acc;    }, {} as Record<string, { 
+      products: number; 
+      quantity: number; 
+      value: number; 
+      avgPrice: number; 
+      movements: number 
+    }>);
 
     // Calcular preço médio
-    Object.values(categoryStats).forEach((stats: any) => {
+    Object.values(categoryStats).forEach((stats: { 
+      products: number; 
+      quantity: number; 
+      value: number; 
+      avgPrice: number; 
+      movements: number 
+    }) => {
       stats.avgPrice = stats.quantity > 0 ? stats.value / stats.quantity : 0;
     });
 
@@ -162,13 +171,11 @@ export function AdvancedReports({ products, movements }: AdvancedReportsProps) {
       const supplierMovements = periodMovements.filter(m => 
         products.find(p => p.id === m.productId)?.supplier === supplier
       );
-      acc[supplier].movements = supplierMovements.length;
-      
-      return acc;
-    }, {} as Record<string, any>);
+      acc[supplier].movements = supplierMovements.length;      return acc;
+    }, {} as Record<string, { quantity: number; value: number; movements: number; avgPrice: number; products: number }>);
 
     // Calcular preço médio
-    Object.values(supplierStats).forEach((stats: any) => {
+    Object.values(supplierStats).forEach((stats) => {
       stats.avgPrice = stats.quantity > 0 ? stats.value / stats.quantity : 0;
     });
 
@@ -191,7 +198,7 @@ export function AdvancedReports({ products, movements }: AdvancedReportsProps) {
       acc[movement.productId].total += movement.quantity;
       
       return acc;
-    }, {} as Record<string, any>);
+    }, {} as Record<string, { in: number; out: number; total: number }>);
 
     const topProducts = Object.entries(productMovements)
       .map(([productId, stats]) => {
@@ -199,7 +206,7 @@ export function AdvancedReports({ products, movements }: AdvancedReportsProps) {
         return {
           product: product?.name || 'Produto não encontrado',
           ...stats,
-          value: product ? product.price * (stats as any).total : 0
+          value: product ? product.price * stats.total : 0
         };
       })
       .sort((a, b) => b.total - a.total)
